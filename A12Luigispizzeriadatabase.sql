@@ -15,7 +15,7 @@ CREATE TABLE Customers (
     phone_number VARCHAR(15) UNIQUE NOT NULL
 );
 
--- 2. Orders Table (customer_id is a foreign key)
+-- 2. Orders Table 
 CREATE TABLE Orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT,
@@ -41,42 +41,36 @@ CREATE TABLE Order_Pizzas (
 );
 
 -- Insert Customers
-INSERT INTO Customers (name, phone_number) VALUES
-    ('Trevor Page', '226-555-4982'),
-    ('John Doe', '555-555-9498');
+INSERT INTO Customers (name, phone_number) 
+VALUES ('Trevor Page', '226-555-4982'),
+       ('John Doe', '555-555-9498');
 
 -- Insert Orders
-INSERT INTO Orders (customer_id, order_date) VALUES
-    (1, '2023-09-10 09:47:00'), -- Order #1: Trevor's first order
-    (2, '2023-09-10 13:20:00'), -- Order #2: John's first order
-	(1, '2023-09-10 09:47:00'), -- Order #3: Trevor's second order
-    (2, '2023-10-10 10:37:00'); -- Order #4: Mike's second order
+INSERT INTO Orders (customer_id, order_date) 
+VALUES (1, '2023-09-10 09:47:00'), -- Order #1: Trevor's first order
+       (2, '2023-09-10 13:20:00'), -- Order #2: John's first order
+       (1, '2023-09-10 09:47:00'), -- Order #3: Trevor's second order
+       (2, '2023-10-10 10:37:00'); -- Order #4: John's second order
 
 -- Insert Pizzas
-INSERT INTO Pizzas (name, price) VALUES
-    ('Pepperoni & Cheese', 7.99),
-    ('Vegetarian', 9.99),
-    ('Meat Lovers', 14.99),
-    ('Hawaiian', 12.99);
+INSERT INTO Pizzas (name, price) 
+VALUES ('Pepperoni & Cheese', 7.99),
+       ('Vegetarian', 9.99),
+       ('Meat Lovers', 14.99),
+       ('Hawaiian', 12.99);
 
 -- Insert Pizzas into Order_Pizzas
-INSERT INTO Order_Pizzas (order_id, pizza_id, quantity) VALUES
-    (1, 1, 1), -- 1x Pepperoni & Cheese
-    (1, 3, 1), -- 1x Meat Lovers
-    (3, 3, 1), -- 1x Meat Lovers
-    (3, 4, 1); -- 1x Hawaiian
-INSERT INTO Order_Pizzas (order_id, pizza_id, quantity) VALUES
-    (2, 2, 1), -- 1x Vegetarian
-    (2, 3, 2); -- 2x Meat Lovers
-INSERT INTO Order_Pizzas (order_id, pizza_id, quantity) VALUES
-    (4, 2, 3), -- 3x Vegetarian
-    (4, 4, 1); -- 1x Hawaiian
-
--- select * from Customers;
--- select * from order_pizzas;
--- select * from orders;
--- select * from pizzas;
-
+INSERT INTO Order_Pizzas (order_id, pizza_id, quantity) 
+VALUES (1, 1, 1), -- 1x Pepperoni & Cheese
+       (1, 3, 1), -- 1x Meat Lovers
+       (3, 3, 1), -- 1x Meat Lovers
+       (3, 4, 1); -- 1x Hawaiian
+INSERT INTO Order_Pizzas (order_id, pizza_id, quantity) 
+VALUES (2, 2, 1), -- 1x Vegetarian
+       (2, 3, 2); -- 2x Meat Lovers
+INSERT INTO Order_Pizzas (order_id, pizza_id, quantity) 
+VALUES (4, 2, 3), -- 3x Vegetarian
+       (4, 4, 1); -- 1x Hawaiian
 
 -- Query: Total spent by each customer
 SELECT c.name AS customer_name, SUM(p.price * op.quantity) AS total_spent
